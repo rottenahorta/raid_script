@@ -1,6 +1,6 @@
 # raid_script
-Simple raid shell script that creates RAID system of given disks using md0 drive, creates simple default partitions of given disks
-make sure u have mdadm, fdisk
+Simple raid shell script that creates RAID system of given disks using md0 drive, creates simple default partitions of given disks  <br />
+make sure u have `mdadm`, `fdisk`  <br />
 tested on Vagrant upped AlmaLinux8 (RHLE distr)
 
 "Usage:"
