@@ -1,0 +1,9 @@
+NAME           SIZE
+otus           480M
+poolCompress   960M
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+NAME  PROPERTY     VALUE           SOURCE
+otus  compression  zle             local
+NAME  PROPERTY  VALUE      SOURCE
+otus  checksum  sha256     local

@@ -1,0 +1,1083 @@
+Script started on 2022-08-19 01:15:43+00:00
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls
+raid.sh  typescript
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ lsblk
+NAME    MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 19.5G  0 disk  
+|-sda1    8:1    0    2G  0 part  [SWAP]
+`-sda2    8:2    0 17.6G  0 part  /
+sdb       8:16   0    1G  0 disk  
+`-sdb1    8:17   0 1023M  0 part  
+  `-md0   9:0    0    2G  0 raid0 /mnt/raidfolder
+sdc       8:32   0    1G  0 disk  
+`-sdc1    8:33   0 1023M  0 part  
+  `-md0   9:0    0    2G  0 raid0 /mnt/raidfolder
+sdd       8:48   0    1G  0 disk  
+sde       8:64   0    1G  0 disk  
+sdf       8:80   0    1G  0 disk  
+sdg       8:96   0    1G  0 disk  
+sdh       8:112  0    1G  0 disk  
+sdi       8:128  0    1G  0 disk  
+sdj       8:144  0    1G  0 disk  
+sdk       8:160  0    1G  0 disk  
+nvme0n1 259:0    0    1G  0 disk  
+nvme0n2 259:1    0    1G  0 disk  
+nvme0n3 259:2    0    1G  0 disk  
+nvme0n4 259:3    0    1G  0 disk  
+nvme0n5 259:4    0    1G  0 disk  
+nvme0n6 259:5    0    1G  0 disk  
+nvme0n7 259:6    0    1G  0 disk  
+nvme0n8 259:7    0    1G  0 disk  
+nvme0n9 259:8    0    1G  0 disk  
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zpool create -f pool1 mirror /dev/vdb /dev/vdc[C[1P[1P[1P[C[C[C[C[C[C[1P[1@C[1@o[1@m[1@p[1@re mirror /dev/vdb /dev/vdc [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs mirror /dev/vdb /dev/vdcc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs mirror /dev/vdb /dev/vdc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdb /dev/vdc[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csdb /dev/vdc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CC /dev/vdc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CC /dev/vdc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /dev/v[1Pdc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /dev/vd[1Pc[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/dev/vdc[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdev/vdc [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pev/vdc
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pv/vdc[1P/vdc[1Pvdc[1Pdc[1Pc[1Pc[Kd[K[d,e]
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ zpool status
+  pool: poolCompress
+ state: ONLINE
+config:
+
+	NAME          STATE     READ WRITE CKSUM
+	poolCompress  ONLINE       0     0     0
+	  mirror-0    ONLINE       0     0     0
+	    sdd       ONLINE       0     0     0
+	    sde       ONLINE       0     0     0
+
+errors: No known data errors
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs[1..3[K4]
+cannot create 'poolCompress/fs[1..4]': invalid character '[' in name
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs[1..4][K}[1P1..4}{1..4}
+too many arguments
+usage:
+	create [-Pnpuv] [-o property=value] ... <filesystem>
+	create [-Pnpsv] [-b blocksize] [-o property=value] ... -V <size> <volume>
+
+For the property list, run: zfs set|get
+
+For the delegated permission list, run: zfs allow|unallow
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs{1..4}[K[K[K[K[K[K[1,2]
+cannot create 'poolCompress/fs[1,2]': invalid character '[' in name
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs[1,2][K[K[K[K[K1
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs1[K2
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs2[K3
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs create poolCompress/fs3[K4
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs list
+NAME               USED  AVAIL     REFER  MOUNTPOINT
+poolCompress       238K   832M     26.5K  /poolCompress
+poolCompress/fs1    24K   832M       24K  /poolCompress/fs1
+poolCompress/fs2    24K   832M       24K  /poolCompress/fs2
+poolCompress/fs3    24K   832M       24K  /poolCompress/fs3
+poolCompress/fs4    24K   832M       24K  /poolCompress/fs4
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo  wget -O War_and_Peace.txt http://www.gutenberg.oorg/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CpWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CoWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CoWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[ClWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CCWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CoWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CmWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CpWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CrWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CeWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CsWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CsWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http://w[Cw.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CfWar_and_Peace.txt http://[C[Cw.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CsWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C{War_and_Peace.txt http:[C/www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C4War_and_Peace.txt h[Ctp://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C}War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt [1Phttp://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt h[1Pttp://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt ht[C[1Pp://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt htt[1Pp://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http[1P://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http:[1P//www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C2/War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http:[1P//www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C1/War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+sudo: wget: command not found
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo yum install wget -y
+Failed to set locale, defaulting to C.UTF-8
+Last metadata expiration check: 0:33:57 ago on Fri Aug 19 00:52:30 2022.
+Dependencies resolved.
+===============================================================================
+ Package            Architecture  Version               Repository        Size
+===============================================================================
+Installing:
+ [1m[32mwget              (B[m x86_64        1.19.5-10.el8         appstream        733 k
+Installing dependencies:
+ [1m[32mlibmetalink       (B[m x86_64        0.1.3-7.el8           baseos            32 k
+
+Transaction Summary
+===============================================================================
+Install  2 Packages
+
+Total download size: 764 k
+Installed size: 2.8 M
+Downloading Packages:
+                         [===                ] ---  B/s |   0  B     --:-- ETA                         [===                ] ---  B/s |   0  B     --:-- ETA                         [   ===             ] ---  B/s |   0  B     --:-- ETA                         [      ===          ] ---  B/s |   0  B     --:-- ETA                         [         ===       ] ---  B/s |   0  B     --:-- ETA                    100% [===================] 1.8 kB/s | 623  B     00:00 ETA                      0% [                   ] 1.8 kB/s |   0  B     00:00 ETA                      0% [                   ] 1.8 kB/s |   0  B     00:00 ETA                    100% [===================] 1.7 kB/s | 653  B     00:00 ETA(1/2): libmetalink-0  0% [                   ] ---  B/s |   0  B     --:-- ETA(1-2/2): wget-1.19.5  0% [                   ] ---  B/s |   0  B     --:-- ETA(1/2): libmetalink-0.1.3-7.el8.x86_64.rpm       60 kB/s |  32 kB     00:00    
+(2/2): wget-1.19.5-1  9% [=-                 ] 324 kB/s |  70 kB     00:02 ETA(2/2): wget-1.19.5-1 26% [=====              ] 331 kB/s | 206 kB     00:01 ETA(2/2): wget-1.19.5-1 48% [=========          ] 343 kB/s | 370 kB     00:01 ETA(2/2): wget-1.19.5-1 79% [===============    ] 369 kB/s | 606 kB     00:00 ETA(2/2): wget-1.19.5-10.el8.x86_64.rpm           443 kB/s | 733 kB     00:01    
+-------------------------------------------------------------------------------
+Total                                          157 kB/s | 764 kB     00:04     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :  [=========================                         ] 1/1  Preparing        :                                                       1/1 
+  Installing       : libmetalink-0.1.3-7.el8.x [                         ] 1/2  Installing       : libmetalink-0.1.3-7.el8.x [==========               ] 1/2  Installing       : libmetalink-0.1.3-7.el8.x [=====================    ] 1/2  Installing       : libmetalink-0.1.3-7.el8.x [======================== ] 1/2  Installing       : libmetalink-0.1.3-7.el8.x86_64                        1/2 
+  Installing       : wget-1.19.5-10.el8.x86_64 [                         ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=                        ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [==                       ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [===                      ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [====                     ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=====                    ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [======                   ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=======                  ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [========                 ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=========                ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [==========               ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [===========              ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [============             ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=============            ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [==============           ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [===============          ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [================         ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=================        ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [==================       ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [===================      ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [====================     ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=====================    ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [======================   ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [=======================  ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64 [======================== ] 2/2  Installing       : wget-1.19.5-10.el8.x86_64                             2/2 
+  Running scriptlet: wget-1.19.5-10.el8.x86_64                             2/2 
+  Verifying        : libmetalink-0.1.3-7.el8.x86_64                        1/2 
+  Verifying        : wget-1.19.5-10.el8.x86_64                             2/2 
+
+Installed:
+  libmetalink-0.1.3-7.el8.x86_64           wget-1.19.5-10.el8.x86_64          
+
+Complete!
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo yum install wget -y wget -O /poolCompress/fs1/War_and_Peace.txt httpp://www.gutenberg.org/ebooks/2600.txt.utf-8
+--2022-08-19 01:26:45--  http://www.gutenberg.org/ebooks/2600.txt.utf-8
+Resolving www.gutenberg.org (www.gutenberg.org)... 152.19.134.47
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.gutenberg.org/ebooks/2600.txt.utf-8 [following]
+--2022-08-19 01:26:45--  https://www.gutenberg.org/ebooks/2600.txt.utf-8
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.gutenberg.org/cache/epub/2600/pg2600.txt [following]
+--2022-08-19 01:26:48--  https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+Reusing existing connection to www.gutenberg.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 3359372 (3.2M) [text/plain]
+Saving to: '/poolCompress/fs1/War_and_Peace.txt'
+
+          /poolComp   0%[                   ]       0  --.-KB/s                        /poolCompr   0%[                   ]   9.11K  14.3KB/s                       /poolCompre   1%[                   ]  45.37K  24.2KB/s                      /poolCompres   4%[                   ] 157.37K  72.0KB/s                     /poolCompress   6%[>                  ] 205.37K  81.2KB/s                    /poolCompress/   7%[>                  ] 253.37K  92.0KB/s                   /poolCompress/f   9%[>                  ] 317.37K   107KB/s                  /poolCompress/fs  11%[=>                 ] 381.37K   120KB/s    eta 24s      /poolCompress/fs1  13%[=>                 ] 445.37K   131KB/s    eta 24s     /poolCompress/fs1/  15%[=>                 ] 509.37K   140KB/s    eta 24s    /poolCompress/fs1/W  17%[==>                ] 573.37K   148KB/s    eta 24s    poolCompress/fs1/Wa  18%[==>                ] 605.37K   147KB/s    eta 24s    oolCompress/fs1/War  20%[==>                ] 685.37K   158KB/s    eta 16s    olCompress/fs1/War_  23%[===>               ] 765.37K   167KB/s    eta 16s    lCompress/fs1/War_a  25%[===>               ] 829.37K   173KB/s    eta 16s    Compress/fs1/War_an  27%[====>              ] 893.37K   178KB/s    eta 16s    ompress/fs1/War_and  29%[====>              ] 957.37K   182KB/s    eta 16s    mpress/fs1/War_and_  31%[=====>             ]   1.01M   186KB/s    eta 12s    press/fs1/War_and_P  33%[=====>             ]   1.08M   190KB/s    eta 12s    ress/fs1/War_and_Pe  36%[=====>             ]   1.15M   270KB/s    eta 12s    ess/fs1/War_and_Pea  38%[======>            ]   1.23M   266KB/s    eta 12s    ss/fs1/War_and_Peac  39%[======>            ]   1.28M   275KB/s    eta 12s    s/fs1/War_and_Peace  41%[======>            ]   1.33M   274KB/s    eta 10s    /fs1/War_and_Peace.  43%[=======>           ]   1.39M   265KB/s    eta 10s    fs1/War_and_Peace.t  45%[=======>           ]   1.45M   264KB/s    eta 10s    s1/War_and_Peace.tx  47%[========>          ]   1.53M   267KB/s    eta 10s    1/War_and_Peace.txt  49%[========>          ]   1.59M   277KB/s    eta 8s     /War_and_Peace.txt   52%[========>          ]   1.67M   278KB/s    eta 8s     War_and_Peace.txt    54%[=========>         ]   1.75M   278KB/s    eta 8s     ar_and_Peace.txt     56%[=========>         ]   1.79M   271KB/s    eta 8s     r_and_Peace.txt      57%[==========>        ]   1.86M   269KB/s    eta 8s     _and_Peace.txt       58%[==========>        ]   1.89M   261KB/s    eta 6s     and_Peace.txt        60%[==========>        ]   1.95M   263KB/s    eta 6s     nd_Peace.txt         63%[===========>       ]   2.03M   266KB/s    eta 6s     d_Peace.txt          65%[===========>       ]   2.11M   267KB/s    eta 6s     _Peace.txt           67%[===========>       ]   2.15M   269KB/s    eta 6s     Peace.txt            67%[===========>       ]   2.17M   244KB/s    eta 5s     eace.txt             73%[============>      ]   2.36M   271KB/s    eta 5s     ace.txt              76%[=============>     ]   2.43M   277KB/s    eta 5s     ce.txt               78%[=============>     ]   2.51M   281KB/s    eta 5s     e.txt                80%[==============>    ]   2.58M   286KB/s    eta 5s     .txt                 83%[==============>    ]   2.67M   301KB/s    eta 2s     txt                  86%[===============>   ]   2.76M   313KB/s    eta 2s     xt                   88%[===============>   ]   2.84M   313KB/s    eta 2s     t                    91%[================>  ]   2.93M   316KB/s    eta 2s                          94%[================>  ]   3.01M   320KB/s    eta 2s                       /  96%[=================> ]   3.11M   324KB/s    eta 0s                      /p  99%[=================> ]   3.18M   334KB/s    eta 0s     /poolCompress/fs1/W 100%[==================>]   3.20M   335KB/s    in 13s     
+
+2022-08-19 01:27:01 (256 KB/s) - '/poolCompress/fs1/War_and_Peace.txt' saved [3359372/3359372]
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls [K[K[Kc[Kls /[K[K[K[Knano .poo[K[K[K[K/poolCompress/fs1/w[KWar_and_Peace.txt 
+bash: nano: command not found
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ nano /poolCompress/fs1/War_and_Peace.txt [C[1P[1P[1P[1P[1@v[1@i
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;26r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[26;1H"/poolCompress/fs1/War_and_Peace.txt" [readonly][dos] 66030L, 3359372C[1;1H﻿The Project Gutenberg eBook of War and Peace, by Leo Tolstoy
+
+This eBook is for the use of anyone anywhere in the United States and
+most other parts of the world at no cost and with almost no restrictions
+whatsoever. You may copy it, give it away or re-use it under the terms
+of the Project Gutenberg License included with this eBook or online at
+www.gutenberg.org. If you are not located in the United States, you
+will have to check the laws of the country where you are located before
+using this eBook.
+
+Title: War and Peace
+
+Author: Leo Tolstoy
+
+Translators: Louise and Aylmer Maude
+
+Release Date: April, 2001 [eBook #2600]
+[Most recently updated: June 14, 2022]
+
+Language: English
+
+
+Produced by: An Anonymous Volunteer and David Widger
+
+*** START OF THE PROJECT GUTENBERG EBOOK WAR AND PEACE ***[1;1H[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[?25l[1;25r[25;1H
+[1;26r[26;1H[K[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1HWAR AND PEACE[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1HBy Leo Tolstoy/Tolstoi[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HContents[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HBOOK ONE: 1805[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER I[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER II[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER III[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER IV[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER V[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER VI[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER VII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER VIII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER IX[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER X[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XI[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XIII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XIV[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XV[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XVI[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XVII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XVIII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XIX[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XX[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XXI[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XXII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XXIII[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l[1;25r[25;1H
+[1;26r[25;5HCHAPTER XXIV[?25h[?25l[1;25r[25;1H
+[1;26r[25;1H[?25h[?25l
+:[?2004h[?25hq[?25l[?2004l[26;1H[K[26;1H[?2004l[?1l>[?25h[?1049l[23;0;0t]0;vagrant@server:/vagrant[vagrant@server vagrant]$ vi /poolCompress/fs1/War_and_Peace.txt [1P[1P[1@c[1@p[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K* /poolCompress/fs2/
+cp: cannot create regular file '/poolCompress/fs2/War_and_Peace.txt': Permission denied
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ cp /poolCompress/fs1/* /poolCompress/fs2/[1@s[1@u[1@d[1@o[1@ 
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs2/[C[C[C[C[C[C[C[C[C[C[1P/3/
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs3/[1P/4/
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs4/3/2/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Pvi /poolCompress/fs1/War_and_Peace.txt [1P[1@4
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;26r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[26;1H"/poolCompress/fs4/War_and_Peace.txt" [readonly][dos] 66030L, 3359372C[1;1H﻿The Project Gutenberg eBook of War and Peace, by Leo Tolstoy
+
+This eBook is for the use of anyone anywhere in the United States and
+most other parts of the world at no cost and with almost no restrictions
+whatsoever. You may copy it, give it away or re-use it under the terms
+of the Project Gutenberg License included with this eBook or online at
+www.gutenberg.org. If you are not located in the United States, you
+will have to check the laws of the country where you are located before
+using this eBook.
+
+Title: War and Peace
+
+Author: Leo Tolstoy
+
+Translators: Louise and Aylmer Maude
+
+Release Date: April, 2001 [eBook #2600]
+[Most recently updated: June 14, 2022]
+
+Language: English
+
+
+Produced by: An Anonymous Volunteer and David Widger
+
+*** START OF THE PROJECT GUTENBERG EBOOK WAR AND PEACE ***[1;1H[?25h[?25l[26;1H[K[26;1H:[?2004h[?25hq[?25l[?2004l[26;1H[K[26;1H[?2004l[?1l>[?25h[?1049l[23;0;0t]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs list
+NAME               USED  AVAIL     REFER  MOUNTPOINT
+poolCompress      13.3M   819M       28K  /poolCompress
+poolCompress/fs1  3.28M   819M     3.28M  /poolCompress/fs1
+poolCompress/fs2  3.28M   819M     3.28M  /poolCompress/fs2
+poolCompress/fs3  3.28M   819M     3.28M  /poolCompress/fs3
+poolCompress/fs4  3.28M   819M     3.28M  /poolCompress/fs4
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress
+NAME          PROPERTY       VALUE  SOURCE
+poolCompress  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress[1P[1@s[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress[1P poolCompress[1P poolCompress[1P poolCompress[1P poolCompressi poolCompresso poolCompressn poolCompress= poolCompressl poolCompressz poolCompressj poolCompressb poolCompress[C[C[C[C[C[C[C[C[C[C[C[C[C/fs1
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=lzjb poolCompress/fs1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Pget compressratio poolCompress/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[K[K[K[K
+NAME          PROPERTY       VALUE  SOURCE
+poolCompress  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[3@set compression=lzjb[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1z poolCompress/fs1l poolCompress/fs1e poolCompress/fs1
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=zle poolCompress/fs1[6Pget compressratio poolCompress/[K
+NAME          PROPERTY       VALUE  SOURCE
+poolCompress  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[1P[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1i poolCompress/fs1o poolCompress/fs1n poolCompress/fs1
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs1  compression  zle             local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1[K[K[K[K[1P poolCompress[1P poolCompress[1P poolCompresst poolCompressa poolCompress[1P poolCompress[1P poolCompressr poolCompressa poolCompresst poolCompressi poolCompresso poolCompress
+NAME          PROPERTY       VALUE  SOURCE
+poolCompress  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress[1P[1@s[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress[1P poolCompress[1P poolCompress[1P poolCompress[1P poolCompressi poolCompresso poolCompressn poolCompress= poolCompresso poolCompressn poolCompress
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=on poolCompress[1Pget compressratio[C[C[C[C[C[C[C[C[C[C[C[C[C
+NAME          PROPERTY       VALUE  SOURCE
+poolCompress  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress[1@set compression=on[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pget compressratio[C[C[C[C[C[C[C[C[C[C[C[C[C/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1i poolCompress/fs1o poolCompress/fs1n poolCompress/fs1
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs1  compression  zle             local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1[1P[1@s[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C= poolCompress/fs1g poolCompress/fs1z poolCompress/fs1i poolCompress/fs1p poolCompress/fs1- poolCompress/fs19 poolCompress/fs1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K2
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=gzip-9 poolCompress/fs2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Pget compression poolCompress/fs1[K2
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs2  compression  gzip-9          local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2r poolCompress/fs2a poolCompress/fs2t poolCompress/fs2i poolCompress/fs2o poolCompress/fs2
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs2  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls poolCompress[K[K[K[K[K[K[K[K[K[K[K[K/poolCompress/
+[0m[38;5;33mfs1[0m  [38;5;33mfs2[0m  [38;5;33mfs3[0m  [38;5;33mfs4[0m
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls /poolCompress/fs1
+War_and_Peace.txt
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ zfs list poolCompress
+NAME           USED  AVAIL     REFER  MOUNTPOINT
+poolCompress  13.3M   819M       28K  /poolCompress
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ zfs list poolCompress[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kafs [K[K[K[Kzfs get feature@zle poolCompress
+bad property list: invalid property 'feature@zle'
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	keystatus        NO       NO   none | unavailable | available
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	objsetid         NO       NO   <uint64>
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	redact_snaps     NO       NO   <snapshot>[,...]
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	aclmode         YES      YES   discard | groupmask | passthrough | restricted
+	acltype         YES      YES   off | nfsv4 | posix
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ a[Kzpool create
+missing pool name argument
+usage:
+	create [-fnd] [-o property=value] ... 
+	    [-O file-system-property=value] ... 
+	    [-m mountpoint] [-R root] <pool> <vdev> ...
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ zpool list
+NAME           SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+poolCompress   960M  13.3M   947M        -         -     0%     1%  1.00x    ONLINE  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ zfs list
+NAME               USED  AVAIL     REFER  MOUNTPOINT
+poolCompress      13.3M   819M       28K  /poolCompress
+poolCompress/fs1  3.28M   819M     3.28M  /poolCompress/fs1
+poolCompress/fs2  3.28M   819M     3.28M  /poolCompress/fs2
+poolCompress/fs3  3.28M   819M     3.28M  /poolCompress/fs3
+poolCompress/fs4  3.28M   819M     3.28M  /poolCompress/fs4
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ tree /poolCompress
+bash: tree: command not found
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ tree /poolCompress[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ksudo zfs set compression=on pooo[KlCompression
+cannot open 'poolCompression': dataset does not exist
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=on poolCompression[K[K[K
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress
+NAME          PROPERTY     VALUE           SOURCE
+poolCompress  compression  on              local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs1  compression  zle             local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1r poolCompress/fs1a poolCompress/fs1t poolCompress/fs1i poolCompress/fs1o poolCompress/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[1P[1@s[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1i poolCompress/fs1o poolCompress/fs1n poolCompress/fs1= poolCompress/fs1o poolCompress/fs1b poolCompress/fs1[1P poolCompress/fs1n poolCompress/fs1
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=on poolCompress/fs1[1Pget compressratio[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@set compression=on[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@s[1P[1@g[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs1  compression  on              local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1[C[C[1P poolCompress/fs1[1P poolCompress/fs1[1P poolCompress/fs1r poolCompress/fs1a poolCompress/fs1t poolCompress/fs1i poolCompress/fs1o poolCompress/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[2Pion[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@set compression=[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pget compressratio[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Pion[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[3@set compression=[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcp /poolCompress[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Krm .[K/poolCompress/fs{1..4}/*
+rm: remove write-protected regular file '/poolCompress/fs1/War_and_Peace.txt'? 
+rm: remove write-protected regular file '/poolCompress/fs2/War_and_Peace.txt'? 
+rm: remove write-protected regular file '/poolCompress/fs3/War_and_Peace.txt'? 
+rm: remove write-protected regular file '/poolCompress/fs4/War_and_Peace.txt'? 
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ rm /poolCompress/fs{1..4}/*[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ksudo wget -O War_and_Peace.txt http://www.gutenberg.orrg/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CWar_and_Peace.txt http://www.gutenberg.or[1Pg/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CpWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CoWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CoWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[ClWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CCWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CoWar_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmpress/War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CfWar_and_Peace.txt http://w[Cw.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CsWar_and_Peace.txt http://[C[Cw.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1War_and_Peace.txt http://www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/War_and_Peace.txt http:[C/www.gutenberg.org/ebooks/2600.txt.utf-8[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+--2022-08-19 01:44:00--  http://www.gutenberg.org/ebooks/2600.txt.utf-8
+Resolving www.gutenberg.org (www.gutenberg.org)... 152.19.134.47
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.gutenberg.org/ebooks/2600.txt.utf-8 [following]
+--2022-08-19 01:44:01--  https://www.gutenberg.org/ebooks/2600.txt.utf-8
+Connecting to www.gutenberg.org (www.gutenberg.org)|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.gutenberg.org/cache/epub/2600/pg2600.txt [following]
+--2022-08-19 01:44:02--  https://www.gutenberg.org/cache/epub/2600/pg2600.txt
+Reusing existing connection to www.gutenberg.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 3359372 (3.2M) [text/plain]
+Saving to: '/poolCompress/fs1/War_and_Peace.txt'
+
+          /poolComp   0%[                   ]       0  --.-KB/s                        /poolCompr   0%[                   ]  21.64K  79.8KB/s                       /poolCompre   1%[                   ]  53.64K   101KB/s                      /poolCompres   3%[                   ] 101.64K   138KB/s                     /poolCompress   5%[                   ] 165.64K   162KB/s                    /poolCompress/   6%[>                  ] 229.64K   180KB/s                   /poolCompress/f   8%[>                  ] 293.64K   193KB/s                  /poolCompress/fs  10%[>                  ] 341.64K   197KB/s                 /poolCompress/fs1  11%[=>                 ] 373.64K   191KB/s                /poolCompress/fs1/  14%[=>                 ] 469.64K   201KB/s               /poolCompress/fs1/W  16%[==>                ] 549.64K   203KB/s               poolCompress/fs1/Wa  19%[==>                ] 629.64K   213KB/s               oolCompress/fs1/War  20%[==>                ] 677.64K   215KB/s    eta 12s    olCompress/fs1/War_  22%[===>               ] 725.64K   215KB/s    eta 12s    lCompress/fs1/War_a  24%[===>               ] 789.64K   220KB/s    eta 12s    Compress/fs1/War_an  26%[===>               ] 853.64K   224KB/s    eta 12s    ompress/fs1/War_and  28%[====>              ] 933.64K   232KB/s    eta 12s    mpress/fs1/War_and_  30%[====>              ]   1014K   238KB/s    eta 10s    press/fs1/War_and_P  33%[=====>             ]   1.08M   260KB/s    eta 10s    ress/fs1/War_and_Pe  37%[======>            ]   1.19M   280KB/s    eta 10s    ess/fs1/War_and_Pea  39%[======>            ]   1.25M   280KB/s    eta 10s    ss/fs1/War_and_Peac  43%[=======>           ]   1.38M   298KB/s    eta 10s    s/fs1/War_and_Peace  46%[=======>           ]   1.49M   309KB/s    eta 6s     /fs1/War_and_Peace.  47%[========>          ]   1.54M   309KB/s    eta 6s     fs1/War_and_Peace.t  50%[========>          ]   1.63M   325KB/s    eta 6s     s1/War_and_Peace.tx  53%[=========>         ]   1.72M   337KB/s    eta 6s     1/War_and_Peace.txt  57%[=========>         ]   1.85M   360KB/s    eta 6s     /War_and_Peace.txt   59%[==========>        ]   1.91M   368KB/s    eta 4s     War_and_Peace.txt    63%[==========>        ]   2.02M   377KB/s    eta 4s     ar_and_Peace.txt     65%[===========>       ]   2.10M   384KB/s    eta 4s     r_and_Peace.txt      68%[============>      ]   2.21M   406KB/s    eta 4s     _and_Peace.txt       73%[============>      ]   2.35M   425KB/s    eta 4s     and_Peace.txt        77%[=============>     ]   2.49M   448KB/s    eta 2s     nd_Peace.txt         83%[==============>    ]   2.66M   470KB/s    eta 2s     d_Peace.txt          88%[===============>   ]   2.85M   501KB/s    eta 2s     _Peace.txt           92%[================>  ]   2.97M   507KB/s    eta 2s     Peace.txt            98%[=================> ]   3.15M   533KB/s    eta 2s     /poolCompress/fs1/W 100%[==================>]   3.20M   541KB/s    in 8.6s    
+
+2022-08-19 01:44:11 (383 KB/s) - '/poolCompress/fs1/War_and_Peace.txt' saved [3359372/3359372]
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ zfs get compressratio poolCompress/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.62x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ cp po[K[K/poolCompress/fs1/* /poolCompress/fs2[K{2..3[K4}/*[Kp[K[K[vagrant@server vagrant]$ cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[K[vagrant@server vagrant]$ cp /poolCompress/fs1/* /poolCompress/fs{2..4}/
+cp: cannot create regular file '/poolCompress/fs4/War_and_Peace.txt': Permission denied
+cp: -r not specified; omitting directory '/poolCompress/fs2/'
+cp: -r not specified; omitting directory '/poolCompress/fs3/'
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[1@s[1@u[1@d[1@o[1@ 
+cp: -r not specified; omitting directory '/poolCompress/fs2/'
+cp: -r not specified; omitting directory '/poolCompress/fs3/'
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[K[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2..4}/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs{2...4}/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /poolCompress/fs1/* /poolCompress/fs{2[C.4}/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C- /poolCompress/fs1/* /poolCompress/fs{2..4}/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cr /poolCompress/fs1/* /poolCompress/fs{2..4}/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ [K[vagrant@server vagrant]$ [K[vagrant@server vagrant]$ [K[vagrant@server vagrant]$ ls /poolCompress/fs1[K2/War_and_Peace.txt [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+War_and_Peace.txt
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ [K[vagrant@server vagrant]$ sudo zfs get comressration /poolCompress/fs1
+bad property list: invalid property 'comressration'
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	keystatus        NO       NO   none | unavailable | available
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	objsetid         NO       NO   <uint64>
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	redact_snaps     NO       NO   <snapshot>[,...]
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	aclmode         YES      YES   discard | groupmask | passthrough | restricted
+	acltype         YES      YES   off | nfsv4 | posix
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get comressration /poolCompress/fs1[1P /poolCompress/fs1
+bad property list: invalid property 'comressratio'
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	keystatus        NO       NO   none | unavailable | available
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	objsetid         NO       NO   <uint64>
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	redact_snaps     NO       NO   <snapshot>[,...]
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	aclmode         YES      YES   discard | groupmask | passthrough | restricted
+	acltype         YES      YES   off | nfsv4 | posix
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get comressratio /poolCompress/fs1[1PpoolCompress/fs1
+bad property list: invalid property 'comressratio'
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	keystatus        NO       NO   none | unavailable | available
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	objsetid         NO       NO   <uint64>
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	redact_snaps     NO       NO   <snapshot>[,...]
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	aclmode         YES      YES   discard | groupmask | passthrough | restricted
+	acltype         YES      YES   off | nfsv4 | posix
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get comressratio poolCompress/fs1[1@p
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.62x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[K2
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs2  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2i poolCompress/fs2o poolCompress/fs2n poolCompress/fs2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K1
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs1  compression  on              local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1[1P[1@s[C[C[C[C[C[C[C[C[C[C[C[C[C[C= poolCompress/fs1g poolCompress/fs1z poolCompress/fs1i poolCompress/fs1p poolCompress/fs1 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C- poolCompress/fs11[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C9 poolCompress/fs1[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[K2
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=gzip-9 poolCompress/fss2[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Pget compression poolCompress/fs1
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K2
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs2  compression  gzip-9          local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs2[Cr poolCompress/fs2a poolCompress/fs2t poolCompress/fs2i poolCompress/fs2o poolCompress/fs2 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+bad property list: invalid property 'compressionratio'
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	keystatus        NO       NO   none | unavailable | available
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	objsetid         NO       NO   <uint64>
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	redact_snaps     NO       NO   <snapshot>[,...]
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	aclmode         YES      YES   discard | groupmask | passthrough | restricted
+	acltype         YES      YES   off | nfsv4 | posix
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressionratio poolCompress/fs2 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs2  compressratio  1.00x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs2ionratio poolCompress/fs2 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P poolCompress/fs2
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cset compression=gzip-9 poolCompress/fss2[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Pget compression poolCompress/fs1
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Krm -r /poolCompress/fs{2..4}/*
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo rm -r /poolCompress/fs{2..4}/*[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K zfs set compree+ssio[K[K[K[K[Ks[K[Kssion=gzip-9 poolc[KCompress/f s2
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=gzip-9 poolCompress/fss2[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C poolCompress/fs2[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C poolCompress/fs2 [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs2
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs2[1P poolCompress/fs2[1P poolCompress/fs2z poolCompress/fs2l poolCompress/fs2e poolCompress/fs2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K3
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=zle poolCompress/fs3[C[K4[1P poolCompress/fs4[1P poolCompress/fs4[1P poolCompress/fs4l poolCompress/fs4z poolCompress/fs4j poolCompress/fs4b poolCompress/fs4 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=lzjb poolCompress/fs4 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pzle poolCompress/fs3
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgzip-9 poolCompress/fss2[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ksudo cp /poolCompress/fs2 /poolCompress/fs1/ /poolCompress/fs1* /poolCompress/fs1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/ *
+cp: cannot stat '/poolCompress/fs2/*': No such file or directory
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs2/* /poolCompress/fs1/**[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K/[Kls /poolCompress/fs2
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls /poolCompress/fs2[K[K[K
+[0m[38;5;33mfs1[0m  [38;5;33mfs2[0m  [38;5;33mfs3[0m  [38;5;33mfs4[0m
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls /poolCompress/fs1
+War_and_Peace.txt
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ ls /poolCompress/fs1[C[C[1P /poolCompress/fs1[1P /poolCompress/fs1s /poolCompress/fs1u /poolCompress/fs1d /poolCompress/fs1o /poolCompress/fs1[C /poolCompress/fs1c /poolCompress/fs1p /poolCompress/fs1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/* /poolCompress/fs2/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K/
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs2/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P2/
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P/s/2/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P/
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs3/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P/
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C4/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs1/* /poolCompress/fs4/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Krm -r /[K[K[K[K/poolCompress/ds[K[Kfs1/*
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo rm /poolCompress/fs1/*cp /poolCompress/fs1/* /poolCompress/fs4/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[26Pls /poolCompress/fs1
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kfs2sudo cp /poolCompress/fs2/* /poolCompress/fs1/**[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czfs set compression=lzjb poolCompress/fs4 [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P4
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ks1 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs1
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs14 poolCompress/fs1
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs set compression=lz4 poolCompress/fs1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[18Prm /poolCompress/fs1/*cp /poolCompress/fs1/* /poolCompress/fs4/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C4/* /poolCompress/fs4/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P/
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo cp /poolCompress/fs4/* /poolCompress/fs1/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pzfs set compression=lz4 poolCompress/fs1
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[18Prm /poolCompress/fs1/*cp /poolCompress/fs1/* /poolCompress/fs4/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2/ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[26Pls /poolCompress/fs1
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kfs2sudo cp /poolCompress/fs2/* /poolCompress/fs1/**[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czfs set compression=lzjb poolCompress/fs4 [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pzle poolCompress/fs3
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@f[1P[1@g[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P poolCompress/fs3[1P poolCompress/fs3[1P poolCompress/fs3[1P poolCompress/fs3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K1
+NAME              PROPERTY     VALUE           SOURCE
+poolCompress/fs1  compression  lz4             local
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compression poolCompress/fs1[1P[1P poolCompress/fs1[1P poolCompress/fs1r poolCompress/fs1a poolCompress/fs1t poolCompress/fs1i poolCompress/fs1o poolCompress/fs1
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs1  compressratio  1.63x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs1[K2
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs2  compressratio  2.67x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs2[K3
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs3  compressratio  1.01x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ sudo zfs get compressratio poolCompress/fs3[K4
+NAME              PROPERTY       VALUE  SOURCE
+poolCompress/fs4  compressratio  1.36x  -
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ exit[K[K[K[Kzfs list
+NAME               USED  AVAIL     REFER  MOUNTPOINT
+poolCompress      9.11M   823M       28K  /poolCompress
+poolCompress/fs1  2.02M   823M     2.02M  /poolCompress/fs1
+poolCompress/fs2  1.23M   823M     1.23M  /poolCompress/fs2
+poolCompress/fs3  3.23M   823M     3.23M  /poolCompress/fs3
+poolCompress/fs4  2.41M   823M     2.41M  /poolCompress/fs4
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ exit
+exit
+
+Script done on 2022-08-19 06:27:37+00:00

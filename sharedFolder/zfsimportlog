@@ -1,0 +1,489 @@
+Script started on 2022-08-19 07:39:30+00:00
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ ls
+filea  fileb
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ ls ../
+'uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg'   [0m[38;5;9mzfs.tar.gz[0m
+ wget-log                                   [38;5;33mzpoolexport[0m
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ ls ../[Kexit[2Plsscript[4Pls;scd vagrant/..[K[3Plszfs --hsudo /sbin/modprobe zfszfs --h[Ksudo dnf install zfs[13Pzfs --hsudo /sbin/modprobe zfszfs --h[Kls[Kcd ..vagrant/;s[Klsscript[4Plsexit[2Pls ../[Kls ../[Ksud[Kdo zpool import -d ${PWD}/
+   pool: otus
+     id: 6554193320433390805
+  state: ONLINE
+status: Some supported features are not enabled on the pool.
+	(Note that they may be intentionally disabled if the
+	'compatibility' property is set.)
+ action: The pool can be imported using its name or numeric identifier, though
+	some features will not be available without an explicit 'zpool upgrade'.
+ config:
+
+	otus                                 ONLINE
+	  mirror-0                           ONLINE
+	    /home/vagrant/zpoolexport/filea  ONLINE
+	    /home/vagrant/zpoolexport/fileb  ONLINE
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zpool import -d ${PWD}/ otus
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ zpool list
+NAME           SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+otus           480M  2.21M   478M        -         -     0%     0%  1.00x    ONLINE  -
+poolCompress   960M  9.11M   951M        -         -     0%     0%  1.00x    ONLINE  -
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get
+missing property argument
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	keystatus        NO       NO   none | unavailable | available
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	objsetid         NO       NO   <uint64>
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	redact_snaps     NO       NO   <snapshot>[,...]
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	aclmode         YES      YES   discard | groupmask | passthrough | restricted
+	acltype         YES      YES   off | nfsv4 | posix
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otusc otuso otusountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otusc otuso otusm otusp otusr otuse otuss otuss otusi otuso otusn otus
+NAME  PROPERTY     VALUE           SOURCE
+otus  compression  zle             local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get compression otus[1P[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otush otuse otusc otusk otuss otusu otusm otus
+NAME  PROPERTY  VALUE      SOURCE
+otus  checksum  sha256     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get checksum otus[Ksudo zfs get checksum otus[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K[2Pzpool listsudo zpool import -d ${PWD}/ otus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list[Ksudo zpool import -d ${PWD}/ otus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list[Ksudo zpool import -d ${PWD}/ otus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list[K -o si[K[Kname,size > vagr[K[K[K[K/vagrant/setting slog
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/sr[Kettingslog 
+NAME           SIZE
+otus           480M
+poolCompress   960M
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/settingslog zpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K[2Pzpool listsudo zfs get recordsize otus > [K>/[K /vagrant/s ettingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NAME           SIZE
+otus           480M
+poolCompress   960M
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/settingslog sudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K recordsize otus compression otus >> /vagrant/ settingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get compression otus >> /vagrant/ssettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[Crecordsize otus compression otus[3Phecksum[C[C[C[C[C >> /vagrant/set tingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@ser[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K recordsize otus compression otus >> /vagrant/ settingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get compression otus >> /vagrant/ssettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[Crecordsize otus compression otus[3Phecksum[C[C[C[C[C >> /vagrant/set tingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@server:~[vagrant@server ~]$ exit
+exit
+
+Script done on 2022-08-19 07:48:05+00:00
+e poolImp mirror zpoolexport/filea zpoolexxport/fileb[A[C[C[C[C[C[C[C[C[Cexit[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Plsscript[4Plsscript /vagrant/zfsimportlog 
+Script started, file is /vagrant/zfsimportlog
+]0;vagrant@server:~[vagrant@server ~]$ ls
+'uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg'   [0m[38;5;9mzfs.tar.gz[0m
+ wget-log                                   [38;5;33mzpoolexport[0m
+]0;vagrant@server:~[vagrant@server ~]$ sudo zpool import -d ${PWD{[K}/
+no pools available to import
+]0;vagrant@server:~[vagrant@server ~]$ cd /[K..
+]0;vagrant@server:/home[vagrant@server home]$ cd ..sudo zpool import -d ${PWD}/
+no pools available to import
+]0;vagrant@server:/home[vagrant@server home]$ cd ..
+]0;vagrant@server:/[vagrant@server /]$ cd ..
+]0;vagrant@server:/[vagrant@server /]$ cd ..sudo zpool import -d ${PWD}/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd ..[Ksudo zpool import -d ${PWD}/
+no pools available to import
+]0;vagrant@server:/[vagrant@server /]$ cd 
+bin/          lib/          poolCompress/ srv/          var/
+boot/         lib64/        proc/         sys/          
+dev/          media/        root/         tmp/          
+etc/          mnt/          run/          usr/          
+home/         opt/          sbin/         vagrant/      
+[vagrant@server /]$ cd poolCompress/fs
+fs1/ fs2/ fs3/ fs4/ 
+[vagrant@server /]$ cd poolCompress/fs[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kva[K[Kcd vaf[Kgrant/
+raid.sh       typescript    zfsimportlog  
+[vagrant@server /]$ cd vagrant/[K[K[K[K[K[K[K[K[K[K[Kcd home/vagrant/
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+.ssh/
+uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg
+.vbox_version
+.wget-hsts
+wget-log
+zfs.tar.gz
+zpoolexport/
+[vagrant@server /]$ cd home/vagrant/z
+zfs.tar.gz   zpoolexport/ 
+[vagrant@server /]$ cd home/vagrant/zpoolexport/
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cd home/vagrant/zpoolexport/sudo zpool import -d ${PWD}/cd ..[Ksudo zpool import -d ${PWD}/
+   pool: otus
+     id: 6554193320433390805
+  state: ONLINE
+status: Some supported features are not enabled on the pool.
+	(Note that they may be intentionally disabled if the
+	'compatibility' property is set.)
+ action: The pool can be imported using its name or numeric identifier, though
+	some features will not be available without an explicit 'zpool upgrade'.
+ config:
+
+	otus                                 ONLINE
+	  mirror-0                           ONLINE
+	    /home/vagrant/zpoolexport/filea  ONLINE
+	    /home/vagrant/zpoolexport/fileb  ONLINE
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zpool import -d ${PWD}/cd home/vagrant/zpoolexport/sudo zpool import -d ${PWD}/cd ..[Ksudo zpool import -d ${PWD}/cd ..[Ksudo zpool import -d ${PWD}/ls[Kexit[2Plsscript[4Pls;scd vagrant/;s[K[K[Kscript im[K[Kvagr[Kra[K[K[K[K[K/vagrant/zfsimportlog 
+Script started, file is /vagrant/zfsimportlog
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ ls
+filea  fileb
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ ls ../
+'uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg'   [0m[38;5;9mzfs.tar.gz[0m
+ wget-log                                   [38;5;33mzpoolexport[0m
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ ls ../[Kexit[2Plsscript[4Pls;scd vagrant/..[K[3Plszfs --hsudo /sbin/modprobe zfszfs --h[Ksudo dnf install zfs[13Pzfs --hsudo /sbin/modprobe zfszfs --h[Kls[Kcd ..vagrant/;s[Klsscript[4Plsexit[2Pls ../[Kls ../[Ksud[Kdo zpool import -d ${PWD}/
+   pool: otus
+     id: 6554193320433390805
+  state: ONLINE
+status: Some supported features are not enabled on the pool.
+	(Note that they may be intentionally disabled if the
+	'compatibility' property is set.)
+ action: The pool can be imported using its name or numeric identifier, though
+	some features will not be available without an explicit 'zpool upgrade'.
+ config:
+
+	otus                                 ONLINE
+	  mirror-0                           ONLINE
+	    /home/vagrant/zpoolexport/filea  ONLINE
+	    /home/vagrant/zpoolexport/fileb  ONLINE
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zpool import -d ${PWD}/ otus
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ zpool list
+NAME           SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+otus           480M  2.21M   478M        -         -     0%     0%  1.00x    ONLINE  -
+poolCompress   960M  9.11M   951M        -         -     0%     0%  1.00x    ONLINE  -
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get
+missing property argument
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	encryptionroot   NO       NO   <filesystem | volume>
+	filesystem_count  NO       NO   <count>
+	guid             Ntivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4 | zstd | zstd-[1-19] | zstd-fast | zstd-fast-[1-10,20,30,40,50,60,70,80,90,100,500,1000]
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify] | sha512[,verify] | skein[,verify] | edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	encryption       NO      YES   on | off | aes-128-ccm | aes-192-ccm | aes-256-ccm | aes-128-gcm | aes-192-gcm | aes-256-gcm
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	keyformat        NO       NO   none | raw | hex | passphrase
+	keylocation     YES       NO   prompt | <file URI> | <https URL> | <http URL>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	pbkdf2iters      NO       NO   <iters>
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | NFS share options
+	sharesmb        YES      YES   on | off | SMB share options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	special_small_blocks YES      YES   zero or 512 to 1M, power of 2
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	projectused@...  NO       NO   <size>
+	userobjused@...  NO       NO   <size>
+	groupobjused@...  NO       NO   <size>
+	projectobjused@...  NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	projectquota@... YES       NO   <size> | none
+	userobjquota@... YES       NO   <size> | none
+	groupobjquota@... YES       NO   <size> | none
+	projectobjquota@... YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+	written#<bookmark>  NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group|project}[obj]{used|quota}@ properties must be appended with
+a user|group|project specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otusc otuso otusm otusp otusr otuse otuss otuss otusi otuso otusn otus
+NAME  PROPERTY     VALUE           SOURCE
+otus  compression  zle             local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get compression otus[1P[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otus[1P otush otuse otusc otusk otuss otusu otusm otus
+NAME  PROPERTY  VALUE      SOURCE
+otus  checksum  sha256     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get checksum otus[Ksudo zfs get checksum otus[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K[2Pzpool listsudo zpool import -d ${PWD}/ otus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list[Ksudo zpool import -d ${PWD}/ otus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list[Ksudo zpool import -d ${PWD}/ otus[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list[K -o si[K[Kname,size > vagr[K[K[K[K/vagrant/setting slog
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/sr[Kettingslog 
+NAME           SIZE
+otus           480M
+poolCompress   960M
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/settingslog zpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K[2Pzpool listsudo zfs get recordsize otus > [K>/[K /vagrant/s ettingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NAME           SIZE
+otus           480M
+poolCompress   960M
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/settingslog sudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K recordsize otus compression otus >> /vagrant/ settingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get compression otus >> /vagrant/ssettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[zpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K[2Pzpool listsudo zfs get recordsize otus > [K>/[K /vagrant/s ettingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+NAME           SIZE
+otus           480M
+poolCompress   960M
+NAME  PROPERTY    VALUE    SOURCE
+otus  recordsize  128K     local
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ cat /vagrant/settingslog sudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[C[1Precordsize[C[C[C[C[C[K recordsize otus compression otus >> /vagrant/ settingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ sudo zfs get compression otus >> /vagrant/ssettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo zfs get recordsize otus >> /vagrant/seettingslog [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17Pcat /vagrant/settingslog 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Czpool list -o name,size > /vagrant/settingsslog[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16Psudo zfs get checksum otus
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@ompression[C[C[C[C[Crecordsize otus compression otus[3Phecksum[C[C[C[C[C >> /vagrant/set tingslog 
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@server:~/zpoolexport[vagrant@server zpoolexport]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@server:~[vagrant@server ~]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@server:~[vagrant@server ~]$ exit
+exit
+Script done, file is /vagrant/zfsimportlog
+]0;vagrant@server:~[vagrant@server ~]$ v[Kexit
+exit
+Script done, file is zfsimportlog
+]0;vagrant@server:/vagrant[vagrant@server vagrant]$ exit
+exit
+
+Script done on 2022-08-19 07:48:14+00:00
